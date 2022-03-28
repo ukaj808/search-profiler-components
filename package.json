@@ -6,8 +6,7 @@
     "build:dev": "webpack --mode development",
     "build:start": "cd dist && PORT=7195 npx serve",
     "start": "webpack serve --open --mode development",
-    "start:live": "webpack serve --open --mode development --live-reload --hot",
-    "heroku-postbuild": "webpack --config ./webpack.config.js --mode production --progress"
+    "start:live": "webpack serve --open --mode development --live-reload --hot"
   },
   "license": "MIT",
   "author": {
@@ -36,6 +35,10 @@
   },
   "dependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "webpack": "^5.57.1",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1",
+    "html-webpack-plugin": "^5.3.2"
   }
 }
