@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ApiSearchBox } from "./ApiSearchBox";
 
 import "./index.css";
 
 const App = () => (
-  <ApiSearchBox type={"cocktail"}/>
+    <>
+          <h1>Welcome to the API Search Box MFE</h1>
+    </>
 );
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<App/>, document.getElementById("app"));

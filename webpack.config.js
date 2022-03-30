@@ -41,7 +41,7 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "api_search_box",
+      name: "ApiSearchBox",
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
