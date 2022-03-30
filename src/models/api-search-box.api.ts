@@ -9,6 +9,7 @@ export interface SearchResults {
 
     profileId: string;
     searchItems?: SearchItem[];
+    recentSearches: string[];
 
 }
 
@@ -20,6 +21,9 @@ export interface SearchItem {
 export interface ApiSearchFields {
     searchStr: string;
     category: string;
+}
+
+export interface ApiSearchBoxLocal {
     profileId: string;
     type: string;
     recentSearches: string[];
