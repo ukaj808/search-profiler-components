@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import axios, {AxiosResponse} from "axios";
-import {ApiSearchFields, ApiSearchOptions, Profile, SearchResults} from "./models/api-search-box.api";
+import {ApiSearchFields, ApiSearchOptions, Profile, SearchResults} from "../models/api-search-box.api";
 import { v4 as uuid } from "uuid";
+import styles from "./styles.css";
 
 
 const ApiSearchBox: React.FC<ApiSearchOptions> = (options: ApiSearchOptions) => {
@@ -53,7 +54,7 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = (options: ApiSearchOptions) => 
 
 
     return (
-        <>
+        <div id="api-search-box">
 
             <div id="search-box">
 
@@ -78,11 +79,11 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = (options: ApiSearchOptions) => 
 
             </div>
 
-            <ul id="recent-searches">
+            <ul id="recent-searches" className={styles.red}>
                 {recentSearches.map((str: string) => <li key={uuid()}><a href={"google.com"}>{str}</a></li>)}
             </ul>
 
-        </>
+        </div>
     );
 
 };

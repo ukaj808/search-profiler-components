@@ -27,7 +27,13 @@ module.exports = {
       },
       {
         test: /\.(css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: ["style-loader", {
+          loader: "css-loader",
+          options: {
+            modules: true,
+            importLoaders: 1
+          }
+        }, "postcss-loader"],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
@@ -45,7 +51,7 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        "./ApiSearchBox" : "./src/ApiSearchBox.tsx"
+        "./ApiSearchBox" : "./src/components/ApiSearchBox.tsx"
       },
       shared: {
         ...deps,
