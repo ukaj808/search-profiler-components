@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios, {AxiosResponse} from "axios";
 import {ApiSearchFields, ApiSearchOptions, Profile, SearchResults} from "../models/api-search-box.api";
 import { v4 as uuid } from "uuid";
-import styles from "./styles.css";
+import styles from "./styles.module.css";
 
 
 const ApiSearchBox: React.FC<ApiSearchOptions> = (options: ApiSearchOptions) => {

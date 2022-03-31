@@ -51,7 +51,7 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        "./ApiSearchBox" : "./src/components/ApiSearchBox.tsx"
+        "./ApiSearchBox" : "./src/components/ApiSearchBox.component"
       },
       shared: {
         ...deps,
