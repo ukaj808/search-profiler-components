@@ -32,12 +32,12 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = (options: ApiSearchOptions) => 
         return axios.get<Profile>(`https://search-profiler.herokuapp.com/profile/${options.profileId}`);
     };
 
-    const search = async () => {
+    const search = async (recent?: string) => {
         try {
 
             let searchResultsResponse: AxiosResponse<SearchResults> =
                 await axios.post<SearchResults>('https://search-profiler.herokuapp.com/search', {
-                    searchStr: searchFields.searchStr,
+                    searchStr: recent ? recent : searchFields.searchStr,
                     category: searchFields.category,
                     profileId: options.profileId,
                     type: options.type
@@ -45,7 +45,7 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = (options: ApiSearchOptions) => 
 
             options.handleResults(searchResultsResponse.data);
 
-            setRecentSearches((prev) => [...prev, searchFields.searchStr]);
+            setRecentSearches((prev) => [...prev, recent ? recent : searchFields.searchStr]);
 
         } catch (err) {
             console.log(err);
@@ -75,12 +75,12 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = (options: ApiSearchOptions) => 
 
                 </select>
 
-                <button type="button" onClick={search}>Search</button>
+                <button type="button" onClick={() => search()}>Search</button>
 
             </div>
 
-            <ul id="recent-searches" className={styles.red}>
-                {recentSearches.map((str: string) => <li key={uuid()}><a href={"google.com"}>{str}</a></li>)}
+            <ul id="recent-searches" className={styles.recentSearches}>
+                {recentSearches.map((str: string) => <li key={uuid()} className={styles.recentSearchItem}><a href="javascript:" onClick={() => search(str)}>{str}</a></li>)}
             </ul>
 
         </div>
