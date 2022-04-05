@@ -8,3 +8,12 @@
     display: inline;
     margin: 1px 1px 1px 1px;
 }
+
+.recentSearchLink {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+}

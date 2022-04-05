@@ -29,14 +29,12 @@ export interface ApiSearchBoxLocal {
     recentSearches: string[];
 }
 
-
 export interface ApiSearchOptions {
     type: string;
     profileId: string;
 
     handleResults(results: SearchResults): SearchResults;
 }
-
 
 export interface Profile {
 

@@ -1,91 +1,102 @@
-import React, {useEffect, useState} from "react";
-import axios, {AxiosResponse} from "axios";
-import {ApiSearchFields, ApiSearchOptions, Profile, SearchResults} from "../models/api-search-box.api";
-import { v4 as uuid } from "uuid";
-import styles from "./styles.module.css";
+import React, { useEffect, useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
+import { v4 as uuid } from 'uuid';
+import {
+  ApiSearchFields, ApiSearchOptions, Profile, SearchResults,
+} from '../models/api-search-box.api';
+import styles from './styles.module.css';
 
+const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: ApiSearchOptions) {
+  const { type, profileId, handleResults } = options;
 
-const ApiSearchBox: React.FC<ApiSearchOptions> = (options: ApiSearchOptions) => {
+  const [searchFields, setSearchFields] = useState<ApiSearchFields>({
+    searchStr: '',
+    category: '',
+  });
 
-    const [searchFields, setSearchFields] = useState<ApiSearchFields>({
-        searchStr: "",
-        category: ""
-    });
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
-    const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const updateProfile = (): Promise<AxiosResponse<Profile>> => axios.get<Profile>(`https://search-profiler.herokuapp.com/profile/${profileId}`);
 
-    useEffect(() => {
-        console.log("useEffect called.");
-        options.profileId && updateProfile().then((res) => {
-            setRecentSearches(() => res.data.searches);
-        }).catch(() => {
+  useEffect(() => {
+    if (profileId) {
+      updateProfile().then((res) => {
+        setRecentSearches(() => res.data.searches);
+      }).catch(() => {
 
-        });
-    }, [options.profileId, recentSearches.length]);
-
-    const handleChange = ({
-                              target: {name, value},
-                          }: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) =>
-        setSearchFields((prev) => ({...prev, [name]: value}));
-
-    const updateProfile = (): Promise<AxiosResponse<Profile>> => {
-        return axios.get<Profile>(`https://search-profiler.herokuapp.com/profile/${options.profileId}`);
-    };
-
-    const search = async (recent?: string) => {
-        try {
-
-            let searchResultsResponse: AxiosResponse<SearchResults> =
-                await axios.post<SearchResults>('https://search-profiler.herokuapp.com/search', {
-                    searchStr: recent ? recent : searchFields.searchStr,
-                    category: searchFields.category,
-                    profileId: options.profileId,
-                    type: options.type
-                });
-
-            options.handleResults(searchResultsResponse.data);
-
-            setRecentSearches((prev) => [...prev, recent ? recent : searchFields.searchStr]);
-
-        } catch (err) {
-            console.log(err);
-        }
+      });
     }
+  }, [profileId, recentSearches.length]);
 
+  const handleChange = ({
+    target: { name, value },
+  }: React.ChangeEvent<HTMLInputElement> |
+      React.ChangeEvent<HTMLSelectElement>) => setSearchFields(
+    (prev) => ({ ...prev, [name]: value }),
+  );
 
-    return (
-        <div id="api-search-box">
+  const search = async (recent?: string) => {
+    try {
+      const searchResultsResponse: AxiosResponse<SearchResults> = await axios.post<SearchResults>('https://search-profiler.herokuapp.com/search', {
+        searchStr: recent || searchFields.searchStr,
+        category: searchFields.category,
+        profileId,
+        type,
+      });
 
-            <div id="search-box">
+      handleResults(searchResultsResponse.data);
 
-                <input type="search"
-                       placeholder="Search..."
-                       name="searchStr"
-                       value={searchFields.searchStr}
-                       onChange={handleChange}/>
+      setRecentSearches((prev) => [...prev, recent || searchFields.searchStr]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-                <select name="category"
-                        value={searchFields.category}
-                        onChange={handleChange}>
+  return (
+    <div id="api-search-box">
 
-                    <option value="all">All</option>
-                    // todo: make generic
-                    <option value="name">Name</option>
-                    <option value="ingredient">Ingredient</option>
+      <div id="search-box">
 
-                </select>
+        <input
+          type="search"
+          placeholder="Search..."
+          name="searchStr"
+          value={searchFields.searchStr}
+          onChange={handleChange}
+        />
 
-                <button type="button" onClick={() => search()}>Search</button>
+        <select
+          name="category"
+          value={searchFields.category}
+          onChange={handleChange}
+        >
 
-            </div>
+          <option value="all">All</option>
+          <option value="name">Name</option>
+          <option value="ingredient">Ingredient</option>
 
-            <ul id="recent-searches" className={styles.recentSearches}>
-                {recentSearches.map((str: string) => <li key={uuid()} className={styles.recentSearchItem}><a href="javascript:" onClick={() => search(str)}>{str}</a></li>)}
-            </ul>
+        </select>
 
-        </div>
-    );
+        <button type="button" onClick={() => search()}>Search</button>
 
+      </div>
+
+      <ul id="recent-searches" className={styles.recentSearches}>
+        {recentSearches.map((str: string) => (
+          <li key={uuid()} className={styles.recentSearchItem}>
+            <button
+              type="button"
+              className={styles.recentSearchLink}
+              onClick={() => search(str)}
+            >
+              {str}
+            </button>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  );
 };
 
 export default ApiSearchBox;
