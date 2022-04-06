@@ -1,10 +1,11 @@
 :root {
-  --jet-orange: #ff8000;
+  --jet-orange-light: #ff8000;
+  --jet-orage-dark: #f86600;
   --jet-offwhite: #f8f5f2;
 }
 
 body {
-  font-family: Takeaway Sans,Avant Garde,Century Gothic,Helvetica,Arial,sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
