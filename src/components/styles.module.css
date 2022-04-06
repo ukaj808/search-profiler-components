@@ -1,7 +1,26 @@
+.apiSearchBox {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.recentSearch {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--jet-orange);
+    margin: 5px 5px 5px 5px;
+
+}
+
+.recentSearchLbl {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--jet-orange);
+}
+
 .recentSearches {
-    list-style-type: none;
-    padding-left: 0;
-    display: inline;
+    display: contents;
+    margin: 3px 3px 3px 3px;
 }
 
 .recentSearchItem{
@@ -16,4 +35,51 @@
     color: #069;
     text-decoration: underline;
     cursor: pointer;
+}
+
+.searchBox {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,.25);
+    padding: 5px 5px 5px 5px;
+    background-color: var(--jet-orange);
+}
+
+.textInput {
+    border: 0;
+    border-radius: 2px 0 0 2px;
+    outline: none;
+    margin: 5px 5px 5px 5px;
+    flex-grow: 1;
+    font-weight: 600;
+}
+
+.categorySelect {
+    text-align: center;
+    background-color: #125fca;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #125fca;
+    border-radius: 0 2px 2px 0;
+    white-space: nowrap;
+    margin: 5px 5px 5px 5px;
+    font-weight: 600;
+}
+
+.searchButton {
+    background-color: #125fca;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #125fca;
+    border-radius: 0 2px 2px 0;
+    white-space: nowrap;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+    font-weight: 600;
+}
+
+@media (max-width: 800px) {
+
 }

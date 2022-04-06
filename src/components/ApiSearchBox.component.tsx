@@ -53,11 +53,12 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: 
   };
 
   return (
-    <div id="api-search-box">
+    <div className={styles.apiSearchBox}>
 
-      <div id="search-box">
+      <div className={styles.searchBox}>
 
         <input
+          className={styles.textInput}
           type="search"
           placeholder="Search..."
           name="searchStr"
@@ -67,6 +68,7 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: 
 
         <select
           name="category"
+          className={styles.categorySelect}
           value={searchFields.category}
           onChange={handleChange}
         >
@@ -77,23 +79,26 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: 
 
         </select>
 
-        <button type="button" onClick={() => search()}>Search</button>
+        <button type="button" className={styles.searchButton} onClick={() => search()}>Search</button>
 
       </div>
 
-      <ul id="recent-searches" className={styles.recentSearches}>
-        {recentSearches.map((str: string) => (
-          <li key={uuid()} className={styles.recentSearchItem}>
-            <button
-              type="button"
-              className={styles.recentSearchLink}
-              onClick={() => search(str)}
-            >
-              {str}
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.recentSearch}>
+        {recentSearches.length > 0 && <span className={styles.recentSearchLbl}>Recent searches: </span>}
+        <ul className={styles.recentSearches}>
+          {recentSearches.map((str: string) => (
+            <li key={uuid()} className={styles.recentSearchItem}>
+              <button
+                type="button"
+                className={styles.recentSearchLink}
+                onClick={() => search(str)}
+              >
+                {str}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
 
     </div>
   );
