@@ -15,6 +15,7 @@ module.exports = {
   devServer: {
     port: process.env.PORT || 7195,
     historyApiFallback: true,
+    allowedHosts: 'all',
   },
 
   module: {
