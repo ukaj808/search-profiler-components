@@ -5,7 +5,7 @@ const deps = require('./package.json').dependencies;
 
 module.exports = {
   output: {
-    publicPath: 'http://localhost:7195/',
+    publicPath: 'auto',
   },
 
   resolve: {
@@ -13,9 +13,8 @@ module.exports = {
   },
 
   devServer: {
-    port: process.env.PORT || 7195,
+    port: 3001,
     historyApiFallback: true,
-    allowedHosts: 'all',
   },
 
   module: {
@@ -49,7 +48,7 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'ApiSearchBox',
+      name: 'api_search_box',
       filename: 'remoteEntry.js',
       remotes: {},
       exposes: {

@@ -16,7 +16,12 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: 
 
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
-  const updateProfile = (): Promise<AxiosResponse<Profile>> => axios.get<Profile>(`https://search-profiler.herokuapp.com/profile/${profileId}`);
+  const updateProfile = (): Promise<AxiosResponse<Profile>> => axios.get<Profile>(`http://localhost:3002/profile/${profileId}`, {
+    proxy: {
+      host: 'localhost',
+      port: 3002,
+    },
+  });
 
   useEffect(() => {
     if (profileId) {
@@ -37,11 +42,16 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: 
 
   const search = async (recent?: string) => {
     try {
-      const searchResultsResponse: AxiosResponse<SearchResults> = await axios.post<SearchResults>('https://search-profiler.herokuapp.com/search', {
+      const searchResultsResponse: AxiosResponse<SearchResults> = await axios.post<SearchResults>('http://localhost:3002/search', {
         searchStr: recent || searchFields.searchStr,
         category: searchFields.category,
         profileId,
         type,
+      }, {
+        proxy: {
+          host: 'localhost',
+          port: 3002,
+        },
       });
 
       handleResults(searchResultsResponse.data);
@@ -53,7 +63,7 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: 
   };
 
   return (
-    <div className={styles.apiSearchBox}>
+    <div>
 
       <div className={styles.searchBox}>
 
@@ -84,7 +94,13 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: 
       </div>
 
       <div className={styles.recentSearch}>
-        {recentSearches.length > 0 && <span className={styles.recentSearchLbl}>Recent searches: </span>}
+        {recentSearches.length > 0 && (
+        <span
+          className={styles.recentSearchLbl}
+        >
+          Recent searches:
+        </span>
+        )}
         <ul className={styles.recentSearches}>
           {recentSearches.map((str: string) => (
             <li key={uuid()} className={styles.recentSearchItem}>

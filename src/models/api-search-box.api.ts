@@ -1,21 +1,12 @@
-export interface SearchRequest {
-    searchStr: string;
-    type: string;
-    category?: string;
-    profileId?: string;
-}
-
-export interface SearchResults {
-
-    profileId: string;
-    searchItems?: SearchItem[];
-    recentSearches: string[];
-
-}
-
 export interface SearchItem {
     category: string;
     items: any[];
+}
+
+export interface SearchResults {
+    profileId: string;
+    searchItems?: SearchItem[];
+    recentSearches: string[];
 }
 
 export interface ApiSearchFields {
