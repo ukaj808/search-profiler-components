@@ -48,11 +48,11 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'api_search_box',
+      name: 'search_profiler_components',
       filename: 'remoteEntry.js',
       remotes: {},
       exposes: {
-        './ApiSearchBox': './src/components/ApiSearchBox.component',
+        './SearchBox': './src/components/SearchBox.component',
       },
       shared: {
         ...deps,

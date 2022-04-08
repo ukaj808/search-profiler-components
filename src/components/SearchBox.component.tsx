@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { v4 as uuid } from 'uuid';
 import {
-  ApiSearchFields, ApiSearchOptions, Profile, SearchResults,
+  SearchFields, SearchOptions, Profile, SearchResults,
 } from '../models/api-search-box.api';
 import styles from './styles.module.css';
 
-const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: ApiSearchOptions) {
+const SearchBox: React.FC<SearchOptions> = function SearchBox(options: SearchOptions) {
   const { type, profileId, handleResults } = options;
 
-  const [searchFields, setSearchFields] = useState<ApiSearchFields>({
+  const [searchFields, setSearchFields] = useState<SearchFields>({
     searchStr: '',
     category: '',
   });
@@ -120,4 +120,4 @@ const ApiSearchBox: React.FC<ApiSearchOptions> = function ApiSearchBox(options: 
   );
 };
 
-export default ApiSearchBox;
+export default SearchBox;

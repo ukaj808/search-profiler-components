@@ -1,5 +1,5 @@
 {
-  "name": "api-search-box",
+  "name": "search-profiler-components",
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --mode production",
