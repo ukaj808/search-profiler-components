@@ -1,6 +1,6 @@
 # Search Profiler Components
 
-Search Profiler Components is a React library that aims to provide useful and reusable ui components which leverage the [Search Profiler](https://link-url-here.org) APIs and search domains.
+Search Profiler Components is a React library that aims to provide useful and reusable ui components which leverage the [Search Profiler](https://github.com/ukaj808/search-profiler) APIs and search domains.
 
 *The Search Profiler API only supports searches on the cocktail domain at this moment.*
 
